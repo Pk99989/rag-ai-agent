@@ -1,0 +1,5 @@
+# Optional: install for deeper LLM-judged quality metrics (faithfulness, answer
+# relevancy) on top of the built-in RBAC regression check.
+#   pip install -r requirements-eval.txt
+ragas>=0.1.9
+datasets>=2.19.0

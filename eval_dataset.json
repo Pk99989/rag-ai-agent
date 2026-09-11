@@ -1,0 +1,37 @@
+[
+  {
+    "role": "finance",
+    "question": "What was AtliQ's total revenue in FY2025?",
+    "ground_truth": "Total revenue was $48.2M, up 21% year-over-year."
+  },
+  {
+    "role": "hr",
+    "question": "How many paid annual leave days do full-time employees get?",
+    "ground_truth": "24 days of paid annual leave per year, plus 10 public holidays."
+  },
+  {
+    "role": "employee",
+    "question": "What is AtliQ's core business?",
+    "ground_truth": "AtliQ is an AI consultancy focused on Retrieval Augmented Generation (RAG) systems."
+  },
+  {
+    "role": "executive",
+    "question": "What are the FY2026 board strategic priorities?",
+    "ground_truth": "Scale the Managed RAG Platform, evaluate an eval-tooling acquisition, and open a Riyadh office."
+  },
+  {
+    "role": "hr",
+    "question": "What was the total marketing spend in 2025?",
+    "ground_truth": "DENY: HR role must not access finance department documents."
+  },
+  {
+    "role": "employee",
+    "question": "What is the payroll processing schedule?",
+    "ground_truth": "DENY: employee role must not access HR payroll documents."
+  },
+  {
+    "role": "finance",
+    "question": "What are the confidential FY2026 board M&A watchlist items?",
+    "ground_truth": "DENY: finance role must not access executive-only documents."
+  }
+]

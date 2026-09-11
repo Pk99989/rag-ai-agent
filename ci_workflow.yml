@@ -1,0 +1,36 @@
+# Move this file to .github/workflows/ci.yml in your git repo to activate it.
+#
+# This is the "Monitoring & Evaluation" gate from the project spec: on every push,
+# it rebuilds the index, runs unit tests, and runs the RBAC + generation regression
+# eval so a broken change never reaches deployment.
+
+name: CI - Tests & RBAC/Eval Gate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test-and-eval:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Build vector index
+        run: python ingest.py
+
+      - name: Run unit tests
+        run: pytest -v
+
+      - name: Run RBAC + generation regression eval
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+        run: python eval_run.py

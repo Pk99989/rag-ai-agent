@@ -1,0 +1,19 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Secrets
+.env
+
+# Cache / local databases
+.cache/
+chroma_store/
+
+# Logs
+logs/
+*.log
+
+# VS Code
+.vscode/
