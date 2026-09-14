@@ -1,0 +1,384 @@
+{
+  "rag_retrieval": {
+    "recall_at_k": 0.95,
+    "precision_at_k": 0.4625,
+    "mrr": 0.95,
+    "k": 4,
+    "n_items": 20,
+    "per_item": [
+      {
+        "id": "RAG-01",
+        "hit_at_k": true,
+        "retrieved_sources": [
+          "olist_regional_summary_rs.md",
+          "olist_regional_summary_pe.md",
+          "olist_regional_summary_pr.md",
+          "olist_regional_summary_es.md"
+        ]
+      },
+      {
+        "id": "RAG-02",
+        "hit_at_k": true,
+        "retrieved_sources": [
+          "olist_regional_summary_pr.md",
+          "olist_regional_summary_pe.md",
+          "olist_regional_summary_rj.md",
+          "olist_regional_summary_ce.md"
+        ]
+      },
+      {
+        "id": "RAG-03",
+        "hit_at_k": true,
+        "retrieved_sources": [
+          "olist_regional_summary_ba.md",
+          "olist_regional_summary_pb.md",
+          "olist_regional_summary_ce.md",
+          "olist_regional_summary_pe.md"
+        ]
+      },
+      {
+        "id": "RAG-04",
+        "hit_at_k": true,
+        "retrieved_sources": [
+          "olist_payment_summary_voucher.md",
+          "olist_payment_summary_not_defined.md",
+          "olist_payment_summary_debit_card.md",
+          "olist_payment_summary_credit_card.md"
+        ]
+      },
+      {
+        "id": "RAG-05",
+        "hit_at_k": true,
+        "retrieved_sources": [
+          "olist_payment_summary_debit_card.md",
+          "olist_payment_summary_credit_card.md",
+          "olist_payment_summary_not_defined.md",
+          "olist_payment_summary_voucher.md"
+        ]
+      },
+      {
+        "id": "RAG-06",
+        "hit_at_k": true,
+        "retrieved_sources": [
+          "olist_category_performance_computers.md",
+          "olist_category_performance_agro_industry_and_commerce.md",
+          "olist_category_performance_industry_commerce_and_business.md",
+          "olist_category_performance_arts_and_craftmanship.md"
+        ]
+      },
+      {
+        "id": "RAG-07",
+        "hit_at_k": true,
+        "retrieved_sources": [
+          "olist_monthly_sales_report_2017_01.md",
+          "olist_monthly_sales_report_2016_12.md",
+          "olist_monthly_sales_report_2017_10.md",
+          "olist_monthly_sales_report_2017_08.md"
+        ]
+      },
+      {
+        "id": "RAG-08",
+        "hit_at_k": true,
+        "retrieved_sources": [
+          "olist_seller_performance_0015a82c2db000af6aaaf3ae2ecb0532.md",
+          "olist_seller_performance_013900e863eace745d3ec7614cab5b1a.md",
+          "olist_seller_performance_002100f778ceb8431b7a1020ff7ab48f.md",
+          "olist_seller_performance_001cca7ae9ae17fb1caed9dfb1094831.md"
+        ]
+      },
+      {
+        "id": "RAG-09",
+        "hit_at_k": true,
+        "retrieved_sources": [
+          "olist_delivery_performance_overall.md",
+          "olist_seller_performance_15ac3c501e2599e4917316fde5c5669a.md",
+          "olist_seller_performance_1992f8fb6b19fcccd97ca819811e7267.md",
+          "olist_seller_performance_37ceb404da208418c9032f0674e57804.md"
+        ]
+      },
+      {
+        "id": "RAG-10",
+        "hit_at_k": true,
+        "retrieved_sources": [
+          "olist_order_status_summary_overall.md",
+          "olist_seller_performance_d1a1b40ec554c593a1a99366746289dd.md",
+          "olist_seller_performance_fc99f99385ae90f66f01733856fb88c9.md",
+          "olist_seller_performance_cf281cf8b7affbdfe751b29cc85580e1.md"
+        ]
+      },
+      {
+        "id": "RAG-11",
+        "hit_at_k": true,
+        "retrieved_sources": [
+          "olist_delivery_performance_overall.md",
+          "olist_seller_performance_cea729054f157f5870bdd321a958d994.md",
+          "olist_seller_performance_1127b7f2594683f2510f1c2c834a486b.md",
+          "olist_seller_performance_cac876b37d3abcd6bd76caca30277996.md"
+        ]
+      },
+      {
+        "id": "RAG-12",
+        "hit_at_k": true,
+        "retrieved_sources": [
+          "olist_order_status_summary_overall.md",
+          "olist_delivery_performance_overall.md",
+          "olist_seller_performance_3785b653b1b82de85ab47dd139938091.md",
+          "olist_seller_performance_d1a1b40ec554c593a1a99366746289dd.md"
+        ]
+      },
+      {
+        "id": "RAG-13",
+        "hit_at_k": false,
+        "retrieved_sources": [
+          "olist_regional_summary_pe.md",
+          "olist_regional_summary_pr.md",
+          "olist_regional_summary_es.md",
+          "olist_regional_summary_ce.md"
+        ]
+      },
+      {
+        "id": "RAG-14",
+        "hit_at_k": true,
+        "retrieved_sources": [
+          "olist_regional_summary_rj.md",
+          "olist_regional_summary_df.md",
+          "olist_regional_summary_es.md",
+          "olist_regional_summary_pe.md"
+        ]
+      },
+      {
+        "id": "RAG-15",
+        "hit_at_k": true,
+        "retrieved_sources": [
+          "olist_regional_summary_mg.md",
+          "olist_regional_summary_pe.md",
+          "olist_regional_summary_rj.md",
+          "olist_regional_summary_pr.md"
+        ]
+      },
+      {
+        "id": "RAG-16",
+        "hit_at_k": true,
+        "retrieved_sources": [
+          "olist_payment_summary_credit_card.md",
+          "olist_payment_summary_debit_card.md",
+          "olist_payment_summary_not_defined.md",
+          "olist_payment_summary_voucher.md"
+        ]
+      },
+      {
+        "id": "RAG-17",
+        "hit_at_k": true,
+        "retrieved_sources": [
+          "olist_payment_summary_boleto.md",
+          "olist_payment_summary_not_defined.md",
+          "olist_payment_summary_voucher.md",
+          "olist_payment_summary_debit_card.md"
+        ]
+      },
+      {
+        "id": "RAG-18",
+        "hit_at_k": true,
+        "retrieved_sources": [
+          "olist_category_performance_industry_commerce_and_business.md",
+          "olist_category_performance_market_place.md",
+          "olist_category_performance_arts_and_craftmanship.md",
+          "olist_category_performance_agro_industry_and_commerce.md"
+        ]
+      },
+      {
+        "id": "RAG-19",
+        "hit_at_k": true,
+        "retrieved_sources": [
+          "olist_monthly_sales_report_2017_01.md",
+          "olist_monthly_sales_report_2017_03.md",
+          "olist_monthly_sales_report_2017_10.md",
+          "olist_monthly_sales_report_2017_04.md"
+        ]
+      },
+      {
+        "id": "RAG-20",
+        "hit_at_k": true,
+        "retrieved_sources": [
+          "olist_seller_performance_0015a82c2db000af6aaaf3ae2ecb0532.md",
+          "olist_seller_performance_001cca7ae9ae17fb1caed9dfb1094831.md",
+          "olist_seller_performance_014c0679dd340a0e338872e7ec85666a.md",
+          "olist_seller_performance_013900e863eace745d3ec7614cab5b1a.md"
+        ]
+      }
+    ]
+  },
+  "rag_generation": {
+    "skipped": "ragas/datasets not installed -- run: pip install -r requirements-eval.txt. Known Windows issue: current ragas pulls in scikit-network, which needs a C compiler to build (see requirements-eval.txt's comment). This is a real gap in this report, not a fabricated 'N/A' -- faithfulness/answer_relevancy/context_precision/context_recall were not computed for this run."
+  },
+  "sql": {
+    "sql_accuracy_pct": 95.0,
+    "n_items": 20,
+    "details": [
+      {
+        "id": "SQL-01",
+        "match": true,
+        "ground_truth": 99441,
+        "pipeline_value": 99441,
+        "pipeline_sql": "SELECT COUNT(*) AS total_orders FROM orders LIMIT 200"
+      },
+      {
+        "id": "SQL-02",
+        "match": true,
+        "ground_truth": 120.65373901464713,
+        "pipeline_value": 120.65373901464713,
+        "pipeline_sql": "SELECT AVG(price) AS avg_item_price FROM order_items LIMIT 200"
+      },
+      {
+        "id": "SQL-03",
+        "match": true,
+        "ground_truth": 96096,
+        "pipeline_value": 96096,
+        "pipeline_sql": "SELECT COUNT(DISTINCT customer_unique_id) FROM customers LIMIT 200"
+      },
+      {
+        "id": "SQL-04",
+        "match": true,
+        "ground_truth": 96478,
+        "pipeline_value": 96478,
+        "pipeline_sql": "SELECT COUNT(*) AS delivered_orders_count FROM orders WHERE order_status = 'delivered' LIMIT 200"
+      },
+      {
+        "id": "SQL-05",
+        "match": true,
+        "ground_truth": 10.419745287594896,
+        "pipeline_value": 10.419745287594896,
+        "pipeline_sql": "SELECT AVG(delivery_days) AS avg_delivery_days\nFROM orders\nWHERE delivery_status = 'on_time'\n  AND delivery_days IS NOT NULL LIMIT 200"
+      },
+      {
+        "id": "SQL-06",
+        "match": true,
+        "ground_truth": 1849,
+        "pipeline_value": 1849,
+        "pipeline_sql": "SELECT COUNT(DISTINCT seller_id) AS num_sellers_in_SP FROM sellers WHERE seller_state = 'SP' LIMIT 200"
+      },
+      {
+        "id": "SQL-07",
+        "match": true,
+        "ground_truth": 2251909.54,
+        "pipeline_value": 2251909.54,
+        "pipeline_sql": "SELECT SUM(freight_value) AS total_freight FROM order_items LIMIT 200"
+      },
+      {
+        "id": "SQL-08",
+        "match": false,
+        "ground_truth": 71,
+        "pipeline_value": 74,
+        "pipeline_sql": "SELECT COUNT(DISTINCT product_category_name_english) AS distinct_category_count FROM products LIMIT 200"
+      },
+      {
+        "id": "SQL-09",
+        "match": true,
+        "ground_truth": 4.088801951021238,
+        "pipeline_value": 4.088801951021238,
+        "pipeline_sql": "SELECT AVG(review_score) AS avg_review_score FROM reviews LIMIT 200"
+      },
+      {
+        "id": "SQL-10",
+        "match": true,
+        "ground_truth": 625,
+        "pipeline_value": 625,
+        "pipeline_sql": "SELECT COUNT(*) AS canceled_orders FROM orders WHERE order_status = 'canceled' LIMIT 200"
+      },
+      {
+        "id": "SQL-11",
+        "match": true,
+        "ground_truth": 12542084.19,
+        "pipeline_value": 12542084.19,
+        "pipeline_sql": "SELECT SUM(payment_value) AS total_credit_card_payments FROM payments WHERE payment_type = 'credit_card' LIMIT 200"
+      },
+      {
+        "id": "SQL-12",
+        "match": true,
+        "ground_truth": 51338,
+        "pipeline_value": 51338,
+        "pipeline_sql": "SELECT COUNT(*) AS num_payments_with_multiple_installments\nFROM payments\nWHERE payment_installments > 1 LIMIT 200"
+      },
+      {
+        "id": "SQL-13",
+        "match": true,
+        "ground_truth": 937814.12,
+        "pipeline_value": 937814.12,
+        "pipeline_sql": "SELECT SUM(price + freight_value) AS total_revenue FROM order_facts WHERE seller_state = 'RJ' LIMIT 200"
+      },
+      {
+        "id": "SQL-14",
+        "match": true,
+        "ground_truth": 154.10038041699553,
+        "pipeline_value": 154.10038041699553,
+        "pipeline_sql": "SELECT AVG(payment_value) FROM payments LIMIT 200"
+      },
+      {
+        "id": "SQL-15",
+        "match": true,
+        "ground_truth": 56910,
+        "pipeline_value": 56910,
+        "pipeline_sql": "SELECT COUNT(*) AS five_star_reviews FROM reviews WHERE review_score = 5 LIMIT 200"
+      },
+      {
+        "id": "SQL-16",
+        "match": true,
+        "ground_truth": 6735.0,
+        "pipeline_value": 6735.0,
+        "pipeline_sql": "SELECT MAX(price) AS max_item_price FROM order_items LIMIT 200"
+      },
+      {
+        "id": "SQL-17",
+        "match": true,
+        "ground_truth": 32951,
+        "pipeline_value": 32951,
+        "pipeline_sql": "SELECT COUNT(*) AS total_products FROM products LIMIT 200"
+      },
+      {
+        "id": "SQL-18",
+        "match": true,
+        "ground_truth": 2276.334314588328,
+        "pipeline_value": 2276.334314588328,
+        "pipeline_sql": "SELECT AVG(product_weight_g) AS avg_product_weight_g FROM products LIMIT 200"
+      },
+      {
+        "id": "SQL-19",
+        "match": true,
+        "ground_truth": 1856161.49,
+        "pipeline_value": 1856161.49,
+        "pipeline_sql": "SELECT SUM(price + freight_value) AS total_revenue FROM order_facts WHERE customer_state = 'MG' LIMIT 200"
+      },
+      {
+        "id": "SQL-20",
+        "match": true,
+        "ground_truth": 2869361.27,
+        "pipeline_value": 2869361.27,
+        "pipeline_sql": "SELECT SUM(payment_value) AS total_boleto FROM payments WHERE payment_type = 'boleto' LIMIT 200"
+      }
+    ]
+  },
+  "rbac": {
+    "rbac_security_pct": 100.0,
+    "n_items": 20,
+    "false_allow_ids": [],
+    "false_deny_ids": []
+  },
+  "security": {
+    "injection_block_accuracy_pct": 100.0,
+    "injection_n_items": 13,
+    "injection_false_negatives_missed_attacks": [],
+    "injection_false_positives_blocked_benign": [],
+    "pii_input_detection_rate_pct": 100.0,
+    "pii_redaction_function_correct_pct": 100.0,
+    "pii_n_items": 7,
+    "note": "PII numbers are input-side detection + redaction-function correctness, not a live end-to-end 'PII leaked into a real LLM answer' measurement -- see this file's module docstring for why that number isn't attempted here."
+  },
+  "general": {
+    "general_accuracy_pct": 95.0,
+    "n_items": 20,
+    "over_refusal_ids": [
+      "GEN-19"
+    ],
+    "under_refusal_ids": []
+  }
+}

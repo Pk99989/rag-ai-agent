@@ -1,0 +1,354 @@
+{
+  "baseline_vector_only": {
+    "recall_at_k": 0.9,
+    "precision_at_k": 0.425,
+    "mrr": 0.9,
+    "n_items": 20,
+    "per_item": [
+      {
+        "id": "RAG-01",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-02",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-03",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-04",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-05",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-06",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-07",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-08",
+        "hit_at_k": false
+      },
+      {
+        "id": "RAG-09",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-10",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-11",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-12",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-13",
+        "hit_at_k": false
+      },
+      {
+        "id": "RAG-14",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-15",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-16",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-17",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-18",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-19",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-20",
+        "hit_at_k": true
+      }
+    ]
+  },
+  "hybrid_no_rerank": {
+    "recall_at_k": 0.95,
+    "precision_at_k": 0.425,
+    "mrr": 0.925,
+    "n_items": 20,
+    "per_item": [
+      {
+        "id": "RAG-01",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-02",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-03",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-04",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-05",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-06",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-07",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-08",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-09",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-10",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-11",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-12",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-13",
+        "hit_at_k": false
+      },
+      {
+        "id": "RAG-14",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-15",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-16",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-17",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-18",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-19",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-20",
+        "hit_at_k": true
+      }
+    ]
+  },
+  "hybrid_rerank": {
+    "recall_at_k": 1.0,
+    "precision_at_k": 0.4625,
+    "mrr": 1.0,
+    "n_items": 20,
+    "per_item": [
+      {
+        "id": "RAG-01",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-02",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-03",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-04",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-05",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-06",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-07",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-08",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-09",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-10",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-11",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-12",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-13",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-14",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-15",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-16",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-17",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-18",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-19",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-20",
+        "hit_at_k": true
+      }
+    ]
+  },
+  "semantic_chunking": {
+    "recall_at_k": 1.0,
+    "precision_at_k": 0.4625,
+    "mrr": 1.0,
+    "n_items": 20,
+    "per_item": [
+      {
+        "id": "RAG-01",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-02",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-03",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-04",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-05",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-06",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-07",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-08",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-09",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-10",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-11",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-12",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-13",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-14",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-15",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-16",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-17",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-18",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-19",
+        "hit_at_k": true
+      },
+      {
+        "id": "RAG-20",
+        "hit_at_k": true
+      }
+    ]
+  }
+}

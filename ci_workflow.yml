@@ -1,8 +1,11 @@
 # Move this file to .github/workflows/ci.yml in your git repo to activate it.
 #
 # This is the "Monitoring & Evaluation" gate from the project spec: on every push,
-# it rebuilds the index, runs unit tests, and runs the RBAC + generation regression
-# eval so a broken change never reaches deployment.
+# it rebuilds the index, runs unit tests (including the Phase 12 API auth/RBAC
+# tests in test_api.py, which need no API key and no built index), runs the
+# router/RBAC smoke tests, runs the RBAC + generation regression eval, and
+# (Phase 14) builds both service images to catch a broken Dockerfile before
+# it ever reaches deploy_azure.sh.
 
 name: CI - Tests & RBAC/Eval Gate
 
@@ -24,13 +27,46 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: Generate synthetic expense/vendor corpus (Phase 16)
+        # No external dataset needed -- pure synthetic generation, unlike
+        # the Olist RAG docs below, which is why this step can run
+        # unconditionally in CI.
+        run: python scripts/generate_expense_docs.py
+
       - name: Build vector index
+        # NOTE (pre-existing gap, not fixed here): this assumes
+        # data/olist.db and data/processed/rag_documents/olist_*.md already
+        # exist in the runner -- neither scripts/prepare_olist.py nor
+        # scripts/generate_olist_rag_docs.py is run here, since the former
+        # needs the gitignored Kaggle dataset (see README's "never commit
+        # the dataset" rule) and this template has no Kaggle credentials
+        # wired in as a secret. Add that as a prior step yourself if you
+        # want this job fully self-contained.
         run: python ingest.py
 
-      - name: Run unit tests
+      - name: Run unit tests (RBAC, guardrails, SQL validator, ingest, Phase 12 API auth)
         run: pytest -v
+
+      - name: Router + RBAC smoke tests
+        run: |
+          python scripts/smoke_test_rbac_phase7.py
+          python scripts/smoke_test_router.py
+          python scripts/smoke_test_router_accuracy.py
 
       - name: Run RBAC + generation regression eval
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: python eval_run.py
+
+  build-images:
+    runs-on: ubuntu-latest
+    needs: test-and-eval
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build API image (build-only, not pushed -- catches a broken
+          Dockerfile.api/requirements.txt before deploy_azure.sh does)
+        run: docker build -f Dockerfile.api -t rag-api:ci .
+
+      - name: Build UI image
+        run: docker build -f Dockerfile.ui -t rag-ui:ci .

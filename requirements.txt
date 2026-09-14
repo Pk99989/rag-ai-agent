@@ -7,3 +7,33 @@ tokenizers>=0.15.0
 streamlit>=1.35.0
 python-dotenv>=1.0.0
 pytest>=8.0.0
+
+# --- Added for Olist structured-data pipeline (Phase 2) ---
+pandas>=2.2.0
+
+# --- Added for Text-to-SQL security (Phase 3) ---
+sqlparse>=0.5.0
+
+# --- Added for hybrid retrieval + reranking (Phase 6) ---
+# rank_bm25 is pure Python, no compiled/heavy deps. The reranker uses
+# onnxruntime (already required above) + huggingface_hub instead of
+# sentence-transformers, to avoid a torch dependency. huggingface_hub was
+# already installed transitively (via tokenizers) but is declared
+# explicitly now that reranker.py imports it directly.
+rank_bm25>=0.2.2
+huggingface_hub>=0.20.0
+
+# --- Added for the FastAPI backend + Streamlit-as-API-client split (Phase 12/13) ---
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.0
+pyjwt>=2.9.0
+slowapi>=0.1.9
+requests>=2.32.0
+
+# --- Added for multimodal document Q&A (Phase 16) ---
+# python-multipart is FastAPI's real requirement for Form()/File()/
+# UploadFile parameters (used by /query/document) -- FastAPI raises a
+# RuntimeError at route-registration time without it, caught by actually
+# starting the API in tests, not by reading FastAPI's docs.
+python-multipart>=0.0.9
+pymupdf>=1.24.0
