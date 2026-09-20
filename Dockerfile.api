@@ -1,0 +1,26 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+RUN chmod +x docker-entrypoint.api.sh
+
+EXPOSE 8000
+ENV PYTHONUNBUFFERED=1
+
+# Index building happens at container STARTUP, not here at build time --
+# see docker-entrypoint.api.sh's comment for why (short version: the
+# Kaggle dataset is gitignored and never baked into this image, so a build
+# would fail in CI / on a clean clone; data/ and chroma_store/ are mounted
+# as volumes instead, per docker-compose.yml).
+ENTRYPOINT ["./docker-entrypoint.api.sh"]
+
+# --workers is intentionally 1: the ONNX reranker/embedding model and the
+# BM25 index are loaded into process memory at import time (see
+# src/rag_agent/retrieval/*), so multiple workers would each hold their own
+# copy. Scale horizontally (multiple container replicas) instead of with
+# --workers if you need more throughput -- that also isolates crashes.
+CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "1"]

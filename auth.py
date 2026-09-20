@@ -16,18 +16,31 @@ class User:
 
 
 # username -> (sha256(password), display name, role)
+# Phase 7: added one demo user per new role (sales, operations, manager,
+# admin) so all roles from the RBAC upgrade are actually testable through
+# the UI, not just present in config.ROLE_ACCESS.
+# Olist-only pivot: removed bob.hr along with the "hr" role in config.py --
+# there is nothing left for an HR account to demonstrate once the AtliQ
+# employee-handbook/payroll-policy documents it existed to guard are gone.
+# The remaining 7 users map 1:1 onto the 7 roles config.py now defines.
 _DEMO_USERS = {
     "alice.finance": (hashlib.sha256(b"finance123").hexdigest(), "Alice Chen", "finance"),
-    "bob.hr": (hashlib.sha256(b"hr123").hexdigest(), "Bob Martinez", "hr"),
     "carol.ceo": (hashlib.sha256(b"exec123").hexdigest(), "Carol Whitfield", "executive"),
     "dave.eng": (hashlib.sha256(b"employee123").hexdigest(), "Dave Kim", "employee"),
+    "erin.sales": (hashlib.sha256(b"sales123").hexdigest(), "Erin Alves", "sales"),
+    "frank.ops": (hashlib.sha256(b"ops123").hexdigest(), "Frank Silva", "operations"),
+    "grace.mgr": (hashlib.sha256(b"manager123").hexdigest(), "Grace Nakamura", "manager"),
+    "henry.admin": (hashlib.sha256(b"admin123").hexdigest(), "Henry Osei", "admin"),
 }
 
 _PLAINTEXT_FOR_DEMO_DISPLAY = {
     "alice.finance": "finance123",
-    "bob.hr": "hr123",
     "carol.ceo": "exec123",
     "dave.eng": "employee123",
+    "erin.sales": "sales123",
+    "frank.ops": "ops123",
+    "grace.mgr": "manager123",
+    "henry.admin": "admin123",
 }
 
 

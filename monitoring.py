@@ -15,7 +15,7 @@ def estimate_cost(tokens_in: int, tokens_out: int, model: str = GROQ_MODEL) -> f
 
 def _ensure_log_file():
     if not USAGE_LOG_PATH.exists():
-        with open(USAGE_LOG_PATH, "w", newline="") as f:
+        with open(USAGE_LOG_PATH, "w", newline="", encoding="utf-8") as f:
             csv.writer(f).writerow(_HEADERS)
 
 
@@ -23,7 +23,13 @@ def log_interaction(user, role, query, result, latency_ms, tokens_in, tokens_out
     _ensure_log_file()
     cost = estimate_cost(tokens_in, tokens_out)
     username = getattr(user, "username", str(user))
-    with open(USAGE_LOG_PATH, "a", newline="") as f:
+    # Explicit encoding="utf-8" here (and below on read) -- found by real
+    # execution of the Phase 12 API's /monitoring/summary endpoint: without
+    # it, Python falls back to the platform's default encoding, and a query
+    # containing non-ASCII text (e.g. "What does the report say about São
+    # Paulo?") got written in a way the default reader couldn't decode,
+    # crashing every future read of this file with UnicodeDecodeError.
+    with open(USAGE_LOG_PATH, "a", newline="", encoding="utf-8") as f:
         csv.writer(f).writerow([
             dt.datetime.utcnow().isoformat(), username, role, query,
             result.get("blocked", False), result.get("reason"),
@@ -38,7 +44,11 @@ def today_usage_summary() -> dict:
         return {"queries": 0, "total_cost_usd": 0.0, "avg_latency_ms": 0.0, "blocked": 0}
     today = dt.date.today().isoformat()
     rows = []
-    with open(USAGE_LOG_PATH, newline="") as f:
+    # errors="replace" tolerates rows written before the encoding="utf-8" fix
+    # above (this log accumulates across runs, so old bad-byte rows can
+    # still exist on disk) without crashing the whole summary over a few
+    # mangled characters in a query string that isn't even displayed here.
+    with open(USAGE_LOG_PATH, newline="", encoding="utf-8", errors="replace") as f:
         for row in csv.DictReader(f):
             if row["timestamp"].startswith(today):
                 rows.append(row)

@@ -3,6 +3,10 @@
 Run this after every change (see ci_workflow.yml) to catch regressions before deploy.
 For deeper LLM-judged quality metrics (faithfulness, answer relevancy), install
 requirements-eval.txt and use `run_ragas_eval()` below.
+
+Phase 9 note: rag_chain.retrieve() now returns (text, metadata, rerank_score)
+triples instead of (text, metadata) pairs (see rag_chain.py's module
+docstring) -- both call sites below were updated to unpack three values.
 """
 import json
 import sys
@@ -26,7 +30,7 @@ def run_rbac_regression() -> bool:
     for item in dataset:
         role = item["role"]
         chunks = retrieve(item["question"], role)
-        for _, meta in chunks:
+        for _, meta, _ in chunks:
             if not is_authorized(role, meta["department"]):
                 failures.append((item["question"], role, meta))
     if failures:
@@ -47,7 +51,14 @@ def run_generation_smoke_test() -> bool:
     ok = True
     for item in dataset:
         result = answer_query(item["question"], user=DummyUser(), role=item["role"])
-        print(f"[{item['role']}] Q: {item['question']}\n -> {result['answer'][:200]}\n")
+        top_citation = result.get("citations", [{}])[0] if result.get("citations") else None
+        print(
+            f"[{item['role']}] Q: {item['question']}\n"
+            f" -> {result['answer'][:200]}\n"
+            f" confidence={result.get('confidence')} "
+            f"citations={len(result.get('citations', []))} "
+            f"top_citation={top_citation}\n"
+        )
         if not result["answer"]:
             ok = False
     return ok
@@ -79,7 +90,7 @@ def run_ragas_eval():
         result = answer_query(item["question"], user=DummyUser(), role=item["role"])
         rows["question"].append(item["question"])
         rows["answer"].append(result["answer"])
-        rows["contexts"].append([c for c, _ in chunks])
+        rows["contexts"].append([c for c, _, _ in chunks])
         rows["ground_truth"].append(item.get("ground_truth", ""))
 
     ds = Dataset.from_dict(rows)
