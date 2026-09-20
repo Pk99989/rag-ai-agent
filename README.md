@@ -1,5 +1,9 @@
 # Role-Based Access Controlled RAG AI Agent — RBAC RAG + Text-to-SQL over Real E-Commerce Data
 
+[![CI](https://github.com/Pk99989/rag-ai-agent/actions/workflows/ci.yml/badge.svg)](https://github.com/Pk99989/rag-ai-agent/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/downloads/)
+
 A runnable implementation of the major project brief: an enterprise AI knowledge and
 analytics assistant that answers questions from real Olist e-commerce data (Brazilian
 Olist marketplace, via Kaggle) combining RAG over generated business-report documents
@@ -98,7 +102,7 @@ policy/vendor context that role isn't authorized to see, since retrieval returns
 
 Pipeline (`src/rag_agent/vision/document_qa.py`): input guardrails on the question → PDF
 pages rendered to PNG (`pdf_utils.py`, PyMuPDF) or the image used directly → a vision LLM
-(`qwen/qwen3.6-27b` on Groq, JSON mode) extracts structured fields (vendor, line items,
+(`qwen/qwen3.8-27b` on Groq, JSON mode) extracts structured fields (vendor, line items,
 total, date) → the extraction output is scanned for embedded prompt injection, the same
 threat model as Phase 8's document-borne injection check applied to an adversarial image →
 extracted fields are PII-redacted → RBAC-filtered retrieval (`hybrid_retrieve`, same
@@ -113,10 +117,15 @@ this RBAC demo, so unlike the Olist corpus (generated from real Kaggle data), th
 nothing real to source this from; fabricating something and presenting it as real would
 have violated this project's own no-fabrication rule, so it's disclosed instead.
 
-`GROQ_VISION_MODEL`, `MAX_DOCUMENT_PAGES` (5), and `MAX_DOCUMENT_IMAGE_MB` (20) in
-`config.py` mirror Groq's real current API limits for `qwen/qwen3.6-27b`, verified against
+`GROQ_VISION_MODEL`, `MAX_DOCUMENT_PAGES` (3), and `MAX_DOCUMENT_IMAGE_MB` (20) in
+`config.py` mirror Groq's real current API limits for `qwen/qwen3.8-27b`, verified against
 https://console.groq.com/docs/vision -- uploads are rejected with a clean 400 before ever
 calling Groq if they'd exceed these, rather than paying for a request guaranteed to fail.
+`qwen/qwen3.8-27b` replaced `qwen/qwen3.6-27b` after Groq deprecated the latter (it started
+returning a live 404 `model_not_found` in production); it's currently a Preview model on
+Groq's side, so it may get deprecated in turn -- if document Q&A starts 404ing again, check
+https://console.groq.com/docs/vision for the current model ID before assuming anything else
+is broken.
 
 ## How monitoring & cost tracking work
 

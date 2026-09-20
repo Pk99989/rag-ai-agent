@@ -1,0 +1,98 @@
+# This is the "Monitoring & Evaluation" gate from the project spec.
+#
+# Split into three jobs deliberately, not laziness:
+#   1. unit-tests    -- fully self-contained (no Kaggle dataset, no API key),
+#                       so this is the job whose pass/fail should actually
+#                       gate the README badge.
+#   2. build-images   -- builds both Docker images. Also self-contained:
+#                       index building happens at container STARTUP, not
+#                       build time (see Dockerfile.api's comment), so this
+#                       never touches the gitignored dataset either.
+#   3. full-eval      -- needs data/olist.db + data/processed/rag_documents/
+#                       (gitignored, never committed -- see README) and a
+#                       real GROQ_API_KEY secret. Neither is set up on a
+#                       fresh clone of this repo, so this job is expected to
+#                       fail until you add a data-prep step (e.g. downloading
+#                       the Kaggle dataset via a KAGGLE_KEY secret) and a
+#                       GROQ_API_KEY repo secret yourself. continue-on-error
+#                       keeps that expected failure from turning the whole
+#                       workflow -- and the badge -- red in the meantime.
+
+name: CI - Tests & RBAC/Eval Gate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Generate synthetic expense/vendor corpus (Phase 16)
+        # No external dataset needed -- pure synthetic generation, unlike
+        # the Olist RAG docs, which is why this step is safe to run
+        # unconditionally in CI.
+        run: python scripts/generate_expense_docs.py
+
+      - name: Run unit tests (RBAC, guardrails, SQL validator, ingest, API auth, document QA)
+        # These do not require a built vector index or a Groq API key --
+        # see each test file's own docstring.
+        run: pytest -v
+
+  build-images:
+    runs-on: ubuntu-latest
+    needs: unit-tests
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build API image (build-only, not pushed -- catches a broken
+          Dockerfile.api/requirements.txt before deploy_azure.sh does)
+        run: docker build -f Dockerfile.api -t rag-api:ci .
+
+      - name: Build UI image
+        run: docker build -f Dockerfile.ui -t rag-ui:ci .
+
+  full-eval:
+    runs-on: ubuntu-latest
+    needs: unit-tests
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Build vector index
+        # Expected to fail on a fresh clone/fork: needs data/olist.db and
+        # data/processed/rag_documents/olist_*.md, which need the gitignored
+        # Kaggle dataset (see README). Add a data-prep step here yourself
+        # (e.g. `kaggle datasets download` using a KAGGLE_KEY secret, then
+        # scripts/prepare_olist.py + scripts/generate_olist_rag_docs.py) to
+        # make this job fully self-contained.
+        run: python ingest.py
+
+      - name: Router + RBAC smoke tests
+        run: |
+          python scripts/smoke_test_rbac_phase7.py
+          python scripts/smoke_test_router.py
+          python scripts/smoke_test_router_accuracy.py
+
+      - name: Run RBAC + generation regression eval
+        # Also needs a real GROQ_API_KEY repo secret for the generation half.
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+        run: python eval_run.py

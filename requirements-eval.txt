@@ -1,17 +1,5 @@
 # Optional: install for deeper LLM-judged quality metrics (faithfulness, answer
-# relevancy, context precision/recall) used by evaluation/run_evaluation.py.
+# relevancy) on top of the built-in RBAC regression check.
 #   pip install -r requirements-eval.txt
-#
-# Known issue (found by real execution, Phase 10, Windows): the current
-# latest ragas (0.4.x as of Sept 2026) transitively depends on
-# scikit-network, which needs a C compiler to build from source and has no
-# prebuilt wheel for at least some Windows/Python combinations. If that
-# install fails with "Microsoft Visual C++ 14.0 or greater is required",
-# either install the MSVC Build Tools, or skip this file entirely --
-# evaluation/run_evaluation.py degrades gracefully and reports the
-# RAGAS-based metrics as explicitly "not computed" rather than failing or
-# fabricating them. This project has NOT verified a specific older ragas
-# version that avoids the scikit-network dependency; guessing one without
-# testing it would just trade one unverified claim for another.
 ragas>=0.1.9
 datasets>=2.19.0

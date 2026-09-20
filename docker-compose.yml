@@ -1,48 +1,14 @@
+version: "3.9"
 services:
-  api:
-    build:
-      context: .
-      dockerfile: Dockerfile.api
+  rag-chatbot:
+    build: .
     ports:
-      - "8000:8000"
+      - "8501:8501"
     env_file:
       - .env
-    environment:
-      # Same-network service name as the CORS-allowed origin for the UI
-      # container below; override API_CORS_ORIGINS in .env if you deploy
-      # the UI somewhere else.
-      API_CORS_ORIGINS: ${API_CORS_ORIGINS:-http://localhost:8501}
     volumes:
       - chroma_store:/app/chroma_store
       - logs:/app/logs
-      # Bind mount, not a named volume: this is the Kaggle dataset you
-      # already prepared locally via scripts/prepare_olist.py +
-      # scripts/generate_olist_rag_docs.py (see README.md) -- it's
-      # gitignored and never part of the image, so it has to come from
-      # your host filesystem. docker-entrypoint.api.sh builds the index
-      # from this on first startup if chroma_store is empty.
-      - ./data:/app/data:ro
-    healthcheck:
-      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-
-  ui:
-    build:
-      context: .
-      dockerfile: Dockerfile.ui
-    ports:
-      - "8501:8501"
-    environment:
-      # Container-to-container DNS name, not localhost -- the UI process
-      # runs in its own container and must reach the api service by its
-      # compose service name.
-      API_BASE_URL: http://api:8000
-    depends_on:
-      api:
-        condition: service_healthy
-
 volumes:
   chroma_store:
   logs:

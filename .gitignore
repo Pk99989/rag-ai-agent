@@ -10,22 +10,6 @@ __pycache__/
 # Cache / local databases
 .cache/
 chroma_store/
-bm25_index.pkl
-
-# Phase 10 experiments/ -- isolated index built by reindex_semantic.py,
-# never the production index (see experiments/reindex_semantic.py's docstring).
-# experiments/results.json and evaluation/results.json are NOT ignored --
-# they're kept as real, timestamped proof of the last real eval run, not
-# transient build output.
-experiments/chroma_store_experiments/
-experiments/bm25_index_experiments.pkl
-
-# Olist dataset -- downloaded locally by each user, never committed
-# (see README for download instructions)
-data/raw/
-data/processed/
-*.db
-*.sqlite
 
 # Logs
 logs/
@@ -33,10 +17,3 @@ logs/
 
 # VS Code
 .vscode/
-
-# Thesis / research-paper deliverables -- not part of the codebase
-*.docx
-
-# Stray artifact from a pip install run without quoting a version spec
-# (e.g. `pip install pkg >=0.5.0` -- the shell treated >=0.5.0 as a redirect)
-=0.5.0

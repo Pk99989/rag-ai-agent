@@ -20,23 +20,9 @@ def test_chunk_text_rejects_bad_overlap():
         chunk_text("some text", chunk_size=100, overlap=100)
 
 
-def test_load_documents_parses_department_from_frontmatter():
-    # Olist-only pivot: load_documents() no longer reads legacy
-    # docs_<department>_<slug>.md files (department-from-filename); it only
-    # loads the generated Olist RAG_DOCS_DIR corpus, department parsed from
-    # each file's frontmatter. Requires RAG_DOCS_DIR to have been populated
-    # by scripts/generate_olist_rag_docs.py -- if that hasn't been run yet
-    # in this environment, docs will be empty and this test is skipped
-    # rather than asserting a false negative.
-    import pytest
-    from config import RAG_DOCS_DIR, ALL_DEPARTMENTS
-
+def test_load_documents_parses_department_from_filename():
     docs = load_documents(BASE_DIR)
-    if not docs:
-        pytest.skip("RAG_DOCS_DIR has no generated documents yet -- run "
-                     "scripts/generate_olist_rag_docs.py first")
     departments = {d["department"] for d in docs}
-    # Every department seen must be one of the real Olist departments
-    # config.py's RBAC dictionaries know about -- no leftover AtliQ tags.
-    assert departments <= ALL_DEPARTMENTS
+    # These departments should exist given the shipped docs_*.md sample corpus.
+    assert {"finance", "hr", "general", "executive"} <= departments
     assert all(d["text"] for d in docs)
